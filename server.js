@@ -27,7 +27,12 @@ app.get("/callback", (req, res) => {
     },
     body: JSON.stringify(body)
   })
+  .then(response => response.json())
+  .then(json => {
+    fetch(`https://api.github.com/user`, {headers: {Authorization: `Bearer ${json.access_token}`}})
     .then(response => response.json())
-    .then(json => res.send(json))
+    .then(userJson => res.send(userJson));
+  })
+  .catch(err => res.send(err)) 
 })
 app.listen(port, () => console.log(`server is listening on port ${port}`));
