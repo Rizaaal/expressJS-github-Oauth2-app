@@ -4,7 +4,11 @@ const port = 3000;
 
 const app = express();
 app.get("/", (req, res) => {
-  res.send('<a href="https://github.com/login/oauth/authorize?client_id=288f2c59a63f6cde2761">login</a>');
+  const html = `
+  <h1>Welcome</h1>
+  <a href="https://github.com/login/oauth/authorize?client_id=288f2c59a63f6cde2761&scope=user">login with github</a>
+  `;
+  res.send(html);
 });
 
 app.get("/callback", (req, res) => {
